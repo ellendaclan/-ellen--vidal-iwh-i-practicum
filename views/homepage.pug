@@ -1,33 +1,24 @@
 doctype html
 html
   head
-    meta(charset="utf-8")
     title= title
-    link(rel="stylesheet", href="/css/style.css")
+    style.
+      body { font-family: Arial, sans-serif; padding: 20px; }
+      table { border-collapse: collapse; width: 80%; margin-top: 20px; }
+      th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+      th { background-color: #f4a1a8; }
+      a { text-decoration: none; color: blue; }
+      a:hover { text-decoration: underline; }
   body
-    h1 Custom Object Table
-
-    // ✅ Show records in a table
-    if records && records.length
-      .form-wrapper
-        table
-          thead
-            tr
-              each prop in properties
-                th= prop
-          tbody
-            each r in records
-              tr
-                each prop in properties
-                  td= (r.properties && r.properties[prop]) ? r.properties[prop] : ''
-    else
-      .form-wrapper
-        p No records yet.
-
-    hr
-
-    // ✅ Action links
-    .form-wrapper
-      a.button(href="/update-cobj") Update Record
-      <br>
-      a.button(href="/create-cobj") Add Record
+    h1= title
+    a(href="/update-cobj") Add/Update this table
+    table
+      thead
+        tr
+          each prop in properties
+            th= prop.charAt(0).toUpperCase() + prop.slice(1)
+      tbody
+        each record in records
+          tr
+            each prop in properties
+              td= record.properties[prop] || ''
