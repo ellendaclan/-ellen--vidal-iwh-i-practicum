@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1= title
+    form(action="/update-cobj", method="post")
+      each prop in properties
+        div
+          label(for=prop)= prop
+          input(type="text", name=prop, id=prop required=(prop === 'name'))
+    button(type="submit") Save
+    p
+      a(href="/") Return to the homepage
